@@ -10,10 +10,12 @@ def transforma_dicionario_em_dataframe(noticias: dict) -> pd.DataFrame:
         noticia.pop("source")
 
     df = pd.DataFrame(noticias)
+    df = df.drop("content", axis=1)
 
     return df
 
 
 def remove_linhas_nulas(df: pd.DataFrame) -> pd.DataFrame:
     """Função que remove linhas com indicação de 'removed'."""
-    pass
+    df = df[df["title"] != "[Removed]"]
+    return df
